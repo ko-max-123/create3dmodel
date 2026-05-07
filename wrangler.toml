@@ -1,6 +1,6 @@
 # KV: 本番では wrangler kv namespace create CHALLENGES で id を発行して差し替えてください。
 # ローカルは npm run dev（--local）で KV をシミュレートします。
-name = "create3d"
+name = "create3dmodel"
 main = "src/index.ts"
 compatibility_date = "2026-01-01"
 
