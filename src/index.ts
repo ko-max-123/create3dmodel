@@ -116,6 +116,11 @@ function round3(v: number): number {
   return Math.round(v * 1000) / 1000;
 }
 
+/** 入力順は問わず、同じ multiset かどうか（「ABC」と「BCA」は一致） */
+function normalizeUnordered(s: string): string {
+  return [...s].sort().join("");
+}
+
 function pointsForChar(
   ch: string,
   index: number,
@@ -280,7 +285,9 @@ async function handleVerify(request: Request, env: Env): Promise<Response> {
   // 使い捨て（設計書: 検証後即削除）
   await env.CHALLENGES.delete(key);
 
-  const ok = answer === correct;
+  const ok =
+    answer.length === correct.length &&
+    normalizeUnordered(answer) === normalizeUnordered(correct);
 
   return json(env, request, {
     ok,
